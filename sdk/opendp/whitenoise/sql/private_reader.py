@@ -164,6 +164,7 @@ class PrivateReader(Reader):
             db_rs = self.reader.execute_ast(subquery)
 
         clamp_counts = self.options.clamp_counts
+        interval_widths = self.interval_widths
 
         def process_row(row_in):
             # pull out tuple values
@@ -181,7 +182,7 @@ class PrivateReader(Reader):
             if clamp_counts:
                 for idx in range(len(row)):
                     if is_count[idx] and out_row[idx] < 0:
-                        out_row[idx] = 0
+                        out_row[idx] = 0                
             return out_row
 
         if hasattr(db_rs, 'rdd'):
