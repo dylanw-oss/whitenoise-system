@@ -225,6 +225,7 @@ class PrivateReader(Reader):
         def process_out_row(row):
             bindings = dict((name.lower(), val ) for name, val in zip(source_col_names, row))
             row = [c.expression.evaluate(bindings) for c in query.select.namedExpressions]
+            
             return [convert(val, type) for val, type in zip(row, out_types)]
 
         if hasattr(out, 'map'):
